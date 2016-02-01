@@ -1,4 +1,4 @@
-# thinkster-django-angular-boilerplate
+# djangular
 
 ## Installation
 
@@ -7,13 +7,12 @@
 [Node.js](http://nodejs.org/).*
 
 * Fork this repository.
-* `$ git clone git@github.com:<your username>/thinkster-django-angular-boilerplate.git`
-* `$ mkvirtualenv thinkster-djangular`
-* `$ cd thinkster-django-angular-boilerplate/`
+* `$ git clone git@github.com:<your username>/djangular.git`
+* `$ mkvirtualenv djangular`
+* `$ cd djangular/`
 * `$ pip install -r requirements.txt`
 * `$ npm install -g bower`
 * `$ npm install`
 * `$ bower install`
 * `$ python manage.py migrate`
 * `$ python manage.py runserver`
-
