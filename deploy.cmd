@@ -128,7 +128,15 @@ REM -- Example --
 REM env\scripts\easy_install pytz
 REM IF !ERRORLEVEL! NEQ 0 goto error
 
-:: 5. Install Bower packages
+:: 5. Install NPM packages
+if EXIST "%DEPLOYMENT_TARGET%\package.json" (
+    pushd "%DEPLOYMENT_TARGET%"
+    call :ExecuteCmd npm install
+    IF !ERRORLEVEL! NEQ 0 goto error
+    popd
+)
+
+:: 6. Install Bower packages
 if EXIST "%DEPLOYMENT_TARGET%\bower.json" (
     pushd "%DEPLOYMENT_TARGET%"
     call :ExecuteCmd bower install
@@ -136,7 +144,7 @@ if EXIST "%DEPLOYMENT_TARGET%\bower.json" (
     popd
 )
 
-:: 6. Run gulp transformations
+:: 7. Run gulp transformations
 IF EXIST "%DEPLOYMENT_TARGET%\gulpfile.js" (
   pushd "%DEPLOYMENT_TARGET%"
   call :ExecuteCmd .\node_modules\.bin\gulp
@@ -144,13 +152,13 @@ IF EXIST "%DEPLOYMENT_TARGET%\gulpfile.js" (
   popd
 )
 
-:: 7. Copy web.config
+:: 8. Copy web.config
 IF EXIST "%DEPLOYMENT_SOURCE%\web.%PYTHON_VER%.config" (
   echo Overwriting web.config with web.%PYTHON_VER%.config
   copy /y "%DEPLOYMENT_SOURCE%\web.%PYTHON_VER%.config" "%DEPLOYMENT_TARGET%\web.config"
 )
 
-:: 8. Django collectstatic
+:: 9. Django collectstatic
 IF EXIST "%DEPLOYMENT_TARGET%\manage.py" (
   IF EXIST "%DEPLOYMENT_TARGET%\env\lib\site-packages\django" (
     IF NOT EXIST "%DEPLOYMENT_TARGET%\.skipDjango" (
