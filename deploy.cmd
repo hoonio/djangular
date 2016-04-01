@@ -128,7 +128,7 @@ REM -- Example --
 REM env\scripts\easy_install pytz
 REM IF !ERRORLEVEL! NEQ 0 goto error
 
-:: 5. Bower Install
+:: 5. Install Bower packages
 if EXIST "%DEPLOYMENT_TARGET%\bower.json" (
     pushd "%DEPLOYMENT_TARGET%"
     call :ExecuteCmd bower install
@@ -136,9 +136,12 @@ if EXIST "%DEPLOYMENT_TARGET%\bower.json" (
     popd
 )
 
-:: 6. Run gulp
-if EXIST "%DEPLOYMENT_TARGET%\gulpfile.js" (
-    "%DEPLOYMENT_TARGET%"\node_modules\gulp\bin\gulp.js
+:: 6. Run gulp transformations
+IF EXIST "%DEPLOYMENT_TARGET%\gulpfile.js" (
+  pushd "%DEPLOYMENT_TARGET%"
+  call :ExecuteCmd .\node_modules\.bin\gulp
+  IF !ERRORLEVEL! NEQ 0 goto error
+  popd
 )
 
 :: 7. Copy web.config
