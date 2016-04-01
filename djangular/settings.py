@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-from os
+import os
 PROJECT_ROOT = path.dirname(path.abspath(os.path.dirname(__file__)))
 
 # Quick-start development settings - unsuitable for production
