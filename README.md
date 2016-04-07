@@ -1,18 +1,14 @@
-# djangular
+# Scylla by Hoonio
 
-## Installation
+## Setup
 
-*NOTE: Requires [virtualenv](http://virtualenv.readthedocs.org/en/latest/),
-[virtualenvwrapper](http://virtualenvwrapper.readthedocs.org/en/latest/) and
-[Node.js](http://nodejs.org/).*
-
-* Fork this repository.
-* `$ git clone git@github.com:<your username>/djangular.git`
-* `$ mkvirtualenv djangular`
-* `$ cd djangular/`
 * `$ pip install -r requirements.txt`
-* `$ npm install -g bower`
 * `$ npm install`
 * `$ bower install`
 * `$ python manage.py migrate`
 * `$ python manage.py runserver`
+
+## To test authentication
+* `python manage.py shell`
+* `from authentication.models import Account`
+* `Account.objects.latest('created_at')`
